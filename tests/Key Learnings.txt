@@ -1,0 +1,45 @@
+Playwright is cross platform
+
+Support multiple browsers
+
+Async await - it doset wait for specific interval or time
+It only performs actions one after another. it has nothing to with waiting for specific interval
+
+Languages Support- C#, java, Javascript, Python
+
+Playwright/tests contain all the packages. u reuire it to start the tests.
+test.only() - this phrase will run only that particular test
+
+Context() - create a new and fresh browser instance. 
+Sometime u require cookies in that case u can include cookies, plugins etc
+Page - in the web browser u create a Page.
+
+U can skip these and directly import page in the testcase and it will create a browser and page on its own
+page.goto() - go to url can be ftp, http, https etc
+page.title() - gets title
+page.goback() -
+page.goforward() -
+page.locator() - Xpath like finding tags, id, class. This is not recommended.
+fill() - only works for input fields like textbox or textarea. enters the string text.
+click() - normal click
+dbclick() - double click
+leftclick() - 
+await - must use in all the componenets. Await works differently during assertions(expect) though.
+textcontent() - used to grab text from the web element. used along with locator 
+expect - assertions. its validation. if its true it moves on if it fails the testcase is failed
+toHaveCount() - arguments - 0 or 1 - 0 means element should not be vivible UI, 1 when u want element in UI
+timeout()
+toContaintext() - Assertions or validation - when u want to validate if the target text is there or not
+alltextcontent() - to get all the text according to match defined. stores in a array.
+isVisible()
+isHidden()
+toBeVisible()
+toBehidden()
+not.
+.selectOption()
+ischecked()
+tobechecked()
+
+Syncromization: many method dosent have auto wait mechanism
+page.waitForLoadState('networkidle') - waits till all the api calls are made. very usedful
+waitFor()- waits for all the elements defined to load in the webpage
