@@ -22,20 +22,21 @@ export default defineConfig({
   },
 
   // ✅ ONLY ONE PROJECT — system Chromium
-  projects: [
-    {
-      name: 'chromium-system',
-      use: {
-        ...devices['Desktop Chrome'],
-        browserName: 'chromium',
-        trace: 'on-first-retry',
-        screenshot: 'only-on-failure',
-        video: 'off',
-        launchOptions: {
-          executablePath: '/usr/bin/chromium-browser',
-          headless: false, // set true later if you want
-        },
-      },
+  
+projects: [
+  {
+    name: 'chrome-system',
+    use: {
+      ...devices['Desktop Chrome'],
+      browserName: 'chromium', // Keep 'chromium' because Playwright uses Chromium engine for Chrome
+      channel: 'chrome',       // This tells Playwright to use Google Chrome
+      trace: 'on-first-retry',
+      screenshot: 'only-on-failure',
+      video: 'off',
+      launchOptions: {
+        headless: false, // set true later if needed
+           },
     },
-  ],
+  },
+],
 });

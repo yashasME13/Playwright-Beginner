@@ -1,0 +1,50 @@
+git clone <repository-url>
+git status
+
+#to push chnages to git repository
+git add .
+git commit -m "commit message"
+git push origin main
+
+#to pull code from git repository
+git pull origin main
+then make changes and push the code
+
+
+browser config
+for fedora linux
+projects: [
+    {
+      name: 'chromium-system',
+      use: {
+        ...devices['Desktop Chrome'],
+        browserName: 'chromium',
+        trace: 'on-first-retry',
+        screenshot: 'only-on-failure',
+        video: 'off',
+        launchOptions: {
+          executablePath: '/usr/bin/chromium-browser',
+          headless: false, // set true later if you want
+        },
+      },
+    },
+  ],
+
+
+for windows
+
+projects: [
+  {
+    name: 'chrome-system',
+    use: {
+      ...devices['Desktop Chrome'],
+      browserName: 'chromium', // Keep 'chromium' because Playwright uses Chromium engine for Chrome
+      channel: 'chrome',       // This tells Playwright to use Google Chrome
+      trace: 'on-first-retry',
+      screenshot: 'only-on-failure',
+      video: 'off',
+      launchOptions: {
+        headless: false, // set true later if needed
+           },
+    },
+  },

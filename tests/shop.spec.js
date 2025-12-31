@@ -6,10 +6,11 @@ test('login and shop automation',async ({page})=>{
     await page.locator("#userPassword").fill("#yashasME13");
     await page.locator("#login").click();
     //wait for network to load all the api. untill it reaches network idle state
-    await  
-    const alldata=await page.locator(".card-body b").allTextContents();
-    console.log(alldata);
+    await page.waitForLoadState('networkidle');
+    //to check if the element is visible
+    //const alldata=await page.locator(".card-body b").allTextContents();
+    //console.log(alldata);
     //for single element
-    //const data=await page.locator(".card-body b").getByText("ADIDAS ORIGINAL");
-    //console.log(data);
+    const data=await page.locator(".card-body b").getByText("ADIDAS ORIGINAL");
+    console.log(data);
 });

@@ -31,7 +31,7 @@ test('First Playwright test',async ({browser})=>{
 
 //only function will run only that particular testcase
 
-test("2nd type to the same thing as first", async ({page})=>{
+test.only("2nd type to the same thing as first", async ({page})=>{
     // u can skin the part of opening the browser andopening a page by using page
     // this is default mode but if u want cookies or plugins then this wont work 
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
@@ -103,7 +103,7 @@ test("login and handling error message using is visibale method", async ({page})
     //await page.waitForTimeout(10000);
 });
 
-test.only("Dropdown button, radio button handling", async ({page})=>{
+test("Dropdown button, radio button handling", async ({page})=>{
     const username=page.locator("#username");
     const password=page.locator("[name='password']");
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
@@ -133,7 +133,6 @@ test.only("Dropdown button, radio button handling", async ({page})=>{
     console.log(await page.locator(".card-body a").allTextContents());
     //await page.waitForTimeout(10000);
 });
-
 
 test('Playwright Actions',async ({page})=>{
     await page.goto("https://google.com");
