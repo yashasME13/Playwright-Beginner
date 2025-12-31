@@ -43,3 +43,6 @@ tobechecked()
 Syncromization: many method dosent have auto wait mechanism
 page.waitForLoadState('networkidle') - waits till all the api calls are made. very usedful
 waitFor()- waits for all the elements defined to load in the webpage
+
+
+testing git
