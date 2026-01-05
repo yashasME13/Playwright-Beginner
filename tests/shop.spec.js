@@ -1,3 +1,4 @@
+
 const {test,expect} = require('@playwright/test');
 
 test('login and shop automation',async ({page})=>{
@@ -13,4 +14,22 @@ test('login and shop automation',async ({page})=>{
     //for single element
     const data=await page.locator(".card-body b").getByText("ADIDAS ORIGINAL");
     console.log(data);
+});
+
+test.only('UI controls', async ({page}) => {
+
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+
+    const username = page.locator('#username');
+    const password = page.locator('#password');
+
+    await username.fill('rahulshettyacademy');
+    await password.fill('learning');
+
+    await page.locator('select.form-control').selectOption('consult' );
+    await page.locator('input#usertype').last().click();
+    await expect(page.locator("#okayBtn")).toBeVisible();
+    await page.locator("#okayBtn").click();
+    await page.pause();
+    // await expect(okBtn).toBeHidden();
 });
