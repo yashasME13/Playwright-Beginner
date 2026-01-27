@@ -39,9 +39,9 @@ toBehidden() - ssertion - it waits for element to be hidden  if its visible even
 will fail 
 not. - used to negate the condition. e.g., not.isVisible() returns true if element is not visible
 .selectOption() -  selects radio button or checkbox or dropdown option(must use value to select that option)
-ischecked() - 
-tobechecked() - 
-
+ischecked() - assertion
+tobechecked() - waits for the button to be checked. but unfortunately there is no toBeUnChecked 
+toBeFalsy() - this does the reverse of the assertion. useful when tobechecked is not available
 
 # dropdown :
 static drop down or select dropdown 

@@ -30,6 +30,12 @@ test.only('UI controls', async ({page}) => {
     await page.locator('input#usertype').last().click();
     await expect(page.locator("#okayBtn")).toBeVisible();
     await page.locator("#okayBtn").click();
+    console.log(await page.locator(".radiotextsty").last().isChecked());
+    
+    await page.locator("#terms").click();
+    await expect(page.locator("#terms")).toBeChecked();
+    await page.locator("#terms").uncheck();
     await page.pause();
+    expect(await page.locator("#terms").isChecked()).toBeFalsy();
     // await expect(okBtn).toBeHidden();
 });
