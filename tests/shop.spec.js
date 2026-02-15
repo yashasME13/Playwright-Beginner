@@ -1,5 +1,5 @@
 
-const {test,expect} = require('@playwright/test');
+const {test,expect,context} = require('@playwright/test');
 
 test('login and shop automation',async ({page})=>{
     await page.goto("https://rahulshettyacademy.com/client/#/auth/login");
@@ -16,13 +16,13 @@ test('login and shop automation',async ({page})=>{
     console.log(data);
 });
 
-test.only('UI controls', async ({page}) => {
+test('UI controls', async ({page}) => {
 
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
 
     const username = page.locator('#username');
     const password = page.locator('#password');
-
+    const blinking=page.locator("[href*='documents-request']");
     await username.fill('rahulshettyacademy');
     await password.fill('learning');
 
@@ -38,4 +38,23 @@ test.only('UI controls', async ({page}) => {
     await page.pause();
     expect(await page.locator("#terms").isChecked()).toBeFalsy();
     // await expect(okBtn).toBeHidden();
+    await expect(blinking).toHaveAttribute("class","blinkingText");
 });
+
+test.only('child windows handling', async({browser})=>{
+    const context=await browser.newContext();
+    const page=await context.newPage();
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+    const blinking=page.locator("[href*='documents-request']");
+
+    //very important
+    //need parallel execution of both the below operations(asynchronous)
+    const[newpage]=await Promise.all([
+    context.waitForEvent('page'), // this will listen for the browser to check for another page
+    // 
+    blinking.click()])// new page is opened
+    //console.log(await newpage.locator(".red").inputValue());
+    const text=await newpage.locator(".red").textContent();
+    const arr=text.split("@");
+    console.log(arr);
+})

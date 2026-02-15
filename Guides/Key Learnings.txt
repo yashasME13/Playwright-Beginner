@@ -42,6 +42,16 @@ not. - used to negate the condition. e.g., not.isVisible() returns true if eleme
 ischecked() - assertion
 tobechecked() - waits for the button to be checked. but unfortunately there is no toBeUnChecked 
 toBeFalsy() - this does the reverse of the assertion. useful when tobechecked is not available
+uncheck() - unchecks
+toBeTruthy() - 
+toHaveAttribute(): used to check if the particular element have matching classname or any other matching element
+inputValue()
+textcontent()
+waitFor() // used for all web elements to load on the page not networkidle. elements should be visible
+async promises: promise pending, promise rejected, promise fulfilled
+Promise.all([]) return value of all the functions mentioned in the array when two functions want to run together like click and switching to new page
+inputValue() gets value of input box or textbox which is already typed or present in input fields
+#to extract or click element with text: page.locator("text=Add to Cart")
 
 # dropdown :
 static drop down or select dropdown 
