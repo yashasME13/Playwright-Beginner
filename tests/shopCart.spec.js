@@ -44,13 +44,32 @@ test.only('child windows handling', async({browser})=>{
     //.infoWrap h3
     await page.locator("li button").nth(2).click();
     await page.waitForLoadState('networkidle');
-    await page.pause();
-    cartitems=await age.locator(".infoWrap ");
+    
+    const cartitems=await page.locator(".infoWrap ");
     let cartnum=await cartitems.count();
     for(let i=0;i<cartnum;i++){
         if (await  cartitems.nth(i).locator("h3")==product){
-            const elementid = cartitems.nth(i).locator(".itemNumber").textContent();
+            const elementid = await cartitems.nth(i).locator(".itemNumber").textContent();
         }
     }
+    await page.locator("text=Checkout").click();
+    await page.waitForLoadState('networkidle');
+    await page.locator("[placeholder*='Country']").pressSequentially("ind", { delay: 150 });
     
+    await expect(page.locator(".ta-results")).toBeVisible();
+    const dropdown=page.locator(".ta-results button");
+    //await dropdown.waitFor();
+    let newcount=await dropdown.count();
+    await console.log("dropdown"+newcount+dropdown);
+    for(let k=0;k<newcount;k++){
+        console.log(await dropdown.nth(k).textContent());
+        if(await dropdown.nth(k).textContent()==" India"){
+            await console.log("india found");
+            await dropdown.nth(k).click();
+        }
+        
+    }
+
+    await page.pause();
+    //later click the order button
 })
