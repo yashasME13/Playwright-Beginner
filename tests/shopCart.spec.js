@@ -66,10 +66,37 @@ test.only('child windows handling', async({browser})=>{
         if(await dropdown.nth(k).textContent()==" India"){
             await console.log("india found");
             await dropdown.nth(k).click();
+            break;
         }
         
     }
+    // here to have text is useful to check if we have required text or not
+    await expect(page.locator(".user__name label")).toHaveText("osama@gmail.com");
+    // click place order button
+    await page.locator(".actions a").click();
+    //now copy the order id once order is placed
+    const orderid=await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
+    //await console.log("Order id:"+orderid);
+    //await page.pause();
+    //now slice the string as it has spaces and unnecessary characters
+    const neworderid=await orderid.slice(3,27);
+    await console.log("after orderid:"+neworderid+"JNNN");
+    //later click the order button
+    await page.locator("li .btn").nth(1).click();
+    await page.waitForLoadState("networkidle");
+    
+    
+    // Wait for exactly 5 seconds
+    await page.waitForTimeout(5000); 
+    const ids = await page.locator(".ng-star-inserted th");
+    
+    await console.log("num of id: ",ids.count());
+    //const ids=await page.locator(".ng-star-inserted th");
+    for(let a=0;a<ids.count();a++){
+        await console.log("Elements are:");
+        console.log(await ids.nth(a).textContent());
+    }
+
 
     await page.pause();
-    //later click the order button
 })
