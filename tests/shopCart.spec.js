@@ -11,8 +11,8 @@ test.only('child windows handling', async({browser})=>{
     await page.locator("#login").click();
     //wait for network to load all the api. untill it reaches network idle state
     await page.waitForLoadState('networkidle');
-    const data=await page.locator(".card-body");
-    await console.log(data);
+    const data=page.locator(".card-body");
+    console.log(data);
 
     let element=await page.locator("li button label").textContent();
     
@@ -24,7 +24,7 @@ test.only('child windows handling', async({browser})=>{
     //const addtocart=await page.locator('button.btn.w-10.rounded');
     //await addtocart.click().
     const count=await data.count();
-    await console.log(count);
+    console.log(count);
     let i=0;
     for (i=0;i<count;i++){
         
@@ -36,7 +36,7 @@ test.only('child windows handling', async({browser})=>{
     
     let initial=0;
     let cartelement=await page.locator("li button label").textContent();
-    await console.log("cartelements:"+cartelement);
+    console.log("cartelements:" + cartelement);
     if( cartelement>initial){
         console.log("item added successfully");
         initial=cartelement
@@ -45,10 +45,10 @@ test.only('child windows handling', async({browser})=>{
     await page.locator("li button").nth(2).click();
     await page.waitForLoadState('networkidle');
     
-    const cartitems=await page.locator(".infoWrap ");
+    const cartitems=page.locator(".infoWrap ");
     let cartnum=await cartitems.count();
     for(let i=0;i<cartnum;i++){
-        if (await  cartitems.nth(i).locator("h3")==product){
+        if (cartitems.nth(i).locator("h3")==product){
             const elementid = await cartitems.nth(i).locator(".itemNumber").textContent();
         }
     }
@@ -60,11 +60,11 @@ test.only('child windows handling', async({browser})=>{
     const dropdown=page.locator(".ta-results button");
     //await dropdown.waitFor();
     let newcount=await dropdown.count();
-    await console.log("dropdown"+newcount+dropdown);
+    console.log("dropdown" + newcount + dropdown);
     for(let k=0;k<newcount;k++){
         console.log(await dropdown.nth(k).textContent());
         if(await dropdown.nth(k).textContent()==" India"){
-            await console.log("india found");
+            console.log("india found");
             await dropdown.nth(k).click();
             break;
         }
@@ -79,23 +79,33 @@ test.only('child windows handling', async({browser})=>{
     //await console.log("Order id:"+orderid);
     //await page.pause();
     //now slice the string as it has spaces and unnecessary characters
-    const neworderid=await orderid.slice(3,27);
-    await console.log("after orderid:"+neworderid+"JNNN");
+    const neworderid=orderid.slice(3, 27);
+    console.log("after orderid:" + neworderid + "JNNN");
     //later click the order button
     await page.locator("li .btn").nth(1).click();
     await page.waitForLoadState("networkidle");
+    await page.locator("tbody").waitFor();
     
     
     // Wait for exactly 5 seconds
-    await page.waitForTimeout(5000); 
-    const ids = await page.locator(".ng-star-inserted th");
+    //await page.waitForTimeout(5000); 
+    const ids =  page.locator("tbody tr");
     
-    await console.log("num of id: ",ids.count());
+    console.log("num of id: ", await ids.allTextContents());
     //const ids=await page.locator(".ng-star-inserted th");
-    for(let a=0;a<ids.count();a++){
-        await console.log("Elements are:");
-        console.log(await ids.nth(a).textContent());
+    for(let a=0;a<await ids.count();a++){
+        console.log("Elements are:");
+        console.log(await ids.nth(a).locator("th").textContent());
+        if (await ids.nth(a).locator("th").textContent()==neworderid){
+            console.log("ids matched");
+            //once id is found click that view button
+            await ids.nth(a).locator("td button").first().click();
+            break;
+        }
+
     }
+    //assertion to check if the orderid matches
+    expect(await page.locator(".col-text ").textContent() == neworderid);
 
 
     await page.pause();
