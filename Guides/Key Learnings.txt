@@ -39,14 +39,27 @@ toBehidden() - ssertion - it waits for element to be hidden  if its visible even
 will fail 
 not. - used to negate the condition. e.g., not.isVisible() returns true if element is not visible
 .selectOption() -  selects radio button or checkbox or dropdown option(must use value to select that option)
-ischecked() - 
-tobechecked() - 
-
+ischecked() - assertion
+tobechecked() - waits for the button to be checked. but unfortunately there is no toBeUnChecked 
+toBeFalsy() - this does the reverse of the assertion. useful when tobechecked is not available
+uncheck() - unchecks
+toBeTruthy() - 
+toHaveAttribute(): used to check if the particular element have matching classname or any other matching element
+inputValue()
+textcontent()
+waitFor() // used for all web elements to load on the page not networkidle. elements should be visible
+async promises: promise pending, promise rejected, promise fulfilled
+Promise.all([]) return value of all the functions mentioned in the array when two functions want to run together like click and switching to new page
+inputValue() gets value of input box or textbox which is already typed or present in input fields
+#to extract or click element with text: page.locator("text=Add to Cart")
 
 # dropdown :
 static drop down or select dropdown 
 Syncromization: many method dosent have auto wait mechanism
 page.waitForLoadState('networkidle') - waits till all the api calls are made. very usedful
-waitFor()- waits for all the elements defined to load in the webpage
+waitFor()- waits for all the elements defined to load in the webpage  --> waitFor() dosent work properly so its better to use expect with toBeVisible()
 
+pressSequentially() //this is used to characters one by one.
 
+// sometimes dom elements dosent even load and test ends with fail: for this use the below
+await orderLocator.waitFor({ state: 'attached', timeout: 20000 }); //attached is used to load the dom elements first

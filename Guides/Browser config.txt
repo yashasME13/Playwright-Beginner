@@ -1,6 +1,6 @@
 #browser config
-#for fedora linux
 
+#for fedora linux
 
 projects: [
     {
