@@ -1,9 +1,9 @@
 const {test,expect} = require('@playwright/test');
 
 test('page',async ({page})=>{
-    await page.goto("http://10.221.31.41:3000/");
-    await page.locator("input.w-full").first().fill("user");
-    await page.locator("input.w-full").nth(1).fill("user@123");
+    await page.goto("http://10.221.44.76/");
+    await page.locator("input.w-full").first().fill("yashas.me");
+    await page.locator("input.w-full").nth(1).fill("#LG12@soft34");
     await page.locator("button").click();
 
     const button = await page.locator("button[title='Next page']");
